@@ -22,9 +22,7 @@ mongoose
 const UserView = require("./server/routers/profile")
 app.use('/',UserView)
 
-app.post("/user/login",(req,res)=>{
-    res.json("Hello")
-})
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
