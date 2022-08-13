@@ -2,21 +2,14 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose")
-
-//importing the profile route
-const profileRoutes=require('./routers/profile')
-
-
+const BodyParser = require("body-parser")
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: false }));
 app.use(cors());
-app.use(express.json());
+// app.use(BodyParser.json());
 
 require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5001;
-
-//app.get('/ping', (req, res) => res.send('pong'))
-
-//using the route
-app.use('/',profileRoutes)
 
 mongoose
     .connect(process.env.ATLAS_URI, {
@@ -26,7 +19,12 @@ mongoose
     })
     .then(() => console.log("db Connected"));
 
+const UserView = require("./server/routers/profile")
+app.use('/',UserView)
 
+app.post("/user/login",(req,res)=>{
+    res.json("Hello")
+})
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
