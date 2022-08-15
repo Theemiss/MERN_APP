@@ -6,9 +6,10 @@ const { User } = require("../models/User");
 const Bcrypt = require("bcryptjs");
 //3rd step
 const JsonWebToken = require("jsonwebtoken");
+require("dotenv").config({ path: "./config.env" });
 
 //importing the profile route
-const SECRET_JWT_CODE = "helloitsme";
+const SECRET_JWT_CODE = process.env.JWT_TOKEN
 
 //4th step
 
@@ -34,8 +35,8 @@ router.post("/user/signup", (req, res) => {
     });
 });
 router.get("/profile", (req, res) => {
-  // let token = req.headers['authorization'].slice(7)
-  // const data = JsonWebToken.verify(token=token,SECRET_JWT_CODE)
+  let token = req.headers['authorization'].slice(7)
+  const data = JsonWebToken.verify(token=token,SECRET_JWT_CODE)
   console.log(data)
   res.json({ "msg": "success" })
 })
