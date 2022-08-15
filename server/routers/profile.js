@@ -5,6 +5,7 @@ const router = express.Router();
 const { User } = require("../models/User");
 const Bcrypt = require("bcryptjs");
 //3rd step
+
 const JsonWebToken = require("jsonwebtoken");
 require("dotenv").config({ path: "./config.env" });
 
